@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="4" total="5" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2023-01-13T16:42:06 IST" name="Default suite" finished-at="2023-01-13T16:49:17 IST" duration-ms="430477">
+    <groups>
+    </groups>
+    <test started-at="2023-01-13T16:42:06 IST" name="Default test" finished-at="2023-01-13T16:49:17 IST" duration-ms="430477">
+      <class name="testCases.NormalUserPendingRequestTest">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:testCases.NormalUserPendingRequestTest@41e36e46]" started-at="2023-01-13T16:42:07 IST" name="setUp" finished-at="2023-01-13T16:42:17 IST" duration-ms="10289" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method is-config="true" signature="beforeMethod(java.lang.reflect.Method)[pri:0, instance:testCases.NormalUserPendingRequestTest@41e36e46]" started-at="2023-01-13T16:42:17 IST" name="beforeMethod" finished-at="2023-01-13T16:42:17 IST" duration-ms="132" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void testCases.NormalUserPendingRequestTest.VerifyNormalUserAssignedProduct()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="VerifyNormalUserAssignedProduct()[pri:1, instance:testCases.NormalUserPendingRequestTest@41e36e46]" started-at="2023-01-13T16:42:17 IST" name="VerifyNormalUserAssignedProduct" finished-at="2023-01-13T16:49:16 IST" duration-ms="419312" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- VerifyNormalUserAssignedProduct -->
+        <test-method is-config="true" signature="reportWrapUp(org.testng.ITestResult,java.lang.reflect.Method)[pri:0, instance:testCases.NormalUserPendingRequestTest@41e36e46]" started-at="2023-01-13T16:49:16 IST" name="reportWrapUp" finished-at="2023-01-13T16:49:16 IST" duration-ms="4" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=VerifyNormalUserAssignedProduct status=SUCCESS method=NormalUserPendingRequestTest.VerifyNormalUserAssignedProduct()[pri:1, instance:testCases.NormalUserPendingRequestTest@41e36e46] output={null}]]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[public void testCases.NormalUserPendingRequestTest.VerifyNormalUserAssignedProduct()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- reportWrapUp -->
+        <test-method is-config="true" signature="closeBrowser()[pri:0, instance:testCases.NormalUserPendingRequestTest@41e36e46]" started-at="2023-01-13T16:49:16 IST" name="closeBrowser" finished-at="2023-01-13T16:49:17 IST" duration-ms="674" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeBrowser -->
+        <test-method is-config="true" signature="close()[pri:0, instance:testCases.NormalUserPendingRequestTest@41e36e46]" started-at="2023-01-13T16:49:17 IST" name="close" finished-at="2023-01-13T16:49:17 IST" duration-ms="484" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- close -->
+      </class> <!-- testCases.NormalUserPendingRequestTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
