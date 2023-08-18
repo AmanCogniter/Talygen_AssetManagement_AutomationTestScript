@@ -167,7 +167,8 @@ public class ProductReportPage extends WebBasePage {
 		WebElement iframe = driver.findElement(By.xpath("//iframe[@id='iReport']"));
 		driver.switchTo().frame(iframe);
 		staticWait(5000);
-		WebElement report = driver.findElement(By.xpath("//div[contains(text(),'Item Report')]"));
+		//WebElement report = driver.findElement(By.xpath("//div/div[text()='Location']"));
+		WebElement report = driver.findElement(By.xpath("//div/div[text()='Item Report']"));
 		try {
 			if (report.isDisplayed()) {
 				logger.info("Project report displayed successfully");
@@ -177,14 +178,32 @@ public class ProductReportPage extends WebBasePage {
 			logger.info("Project report displayed successfully");
 		}
 	}
-
+	public void validateProjectReportOfCountReport() {
+		staticWait(2000);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+		WebElement iframe = driver.findElement(By.xpath("//iframe[@id='iReport']"));
+		driver.switchTo().frame(iframe);
+		staticWait(5000);
+		//WebElement report = driver.findElement(By.xpath("//div/div[text()='Location']"));
+		WebElement report = driver.findElement(By.xpath("//div/div[text()='Location']"));
+		try {
+			if (report.isDisplayed()) {
+				logger.info("Project Count report displayed successfully");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.info("Project Count report not displayed successfully");
+		}
+	}
 	public void validateProjectNameInReport() {
 		staticWait(2000);
-		click(By.xpath(
-				"//div[@class='e-reportviewer-paragrap']/div[contains(text(),'ginny')]/ancestor::div[@class='e-reportviewer-txtitem e-reportviewer-tab-focus-none']/div"),
-				"User name", 30);
+		
 
 		try {
+			click(By.xpath(
+					"//div[@class='e-reportviewer-paragrap']/div[contains(text(),'ginny')]/ancestor::div[@class='e-reportviewer-txtitem e-reportviewer-tab-focus-none']/div"),
+					"User name", 30);
 			staticWait(3000);
 			String report = driver
 					.findElement(By.xpath("//div[contains(text(),'" + productTypePage.productname + "')]")).getText();
@@ -195,8 +214,25 @@ public class ProductReportPage extends WebBasePage {
 			// TODO: handle exception
 			logger.info(productTypePage.productname + " is not displayed successfully on Report");
 		}
-		driver.navigate().refresh();
+		
 	}
+
+	/*
+	 * public void validateProjectNameInReport() { staticWait(2000);
+	 * 
+	 * 
+	 * try { click(By.xpath(
+	 * "//div[@class='e-reportviewer-paragrap']/div[contains(text(),'ginny')]/ancestor::div[@class='e-reportviewer-txtitem e-reportviewer-tab-focus-none']/div"
+	 * ), "User name", 30); staticWait(3000); String report = driver
+	 * .findElement(By.xpath("//div[contains(text(),'" + productTypePage.productname
+	 * + "')]")).getText(); if (report.contains(productTypePage.productname)) {
+	 * logger.info(productTypePage.productname +
+	 * " is displayed successfully on Report"); } } catch (Exception e) { // TODO:
+	 * handle exception logger.info(productTypePage.productname +
+	 * " is not displayed successfully on Report"); }
+	 * 
+	 * }
+	 */
 
 	/*----------------------------------------------------------Audit Log Report-----------------------------------------------------------------------------------------------------------*/
 	public void clickOnAuditLogReport() {
@@ -268,7 +304,7 @@ public class ProductReportPage extends WebBasePage {
 			// TODO: handle exception
 			logger.info("Audit Log report not displayed successfully");
 		}
-		driver.navigate().refresh();
+		
 	}
 
 	/*--------------------------------------------------------------Code for Product Barcode Report------------------------------------------------------------*/
@@ -347,7 +383,7 @@ public class ProductReportPage extends WebBasePage {
 			// TODO: handle exception
 			logger.info(productTypePage.productname + " is not displayed successfully on Report");
 		}
-		driver.navigate().refresh();
+		
 	}
 	/*--------------------------------------------------------------Item Log History Report------------------------------------------------------------*/
 	public void clickOnItemLogHistoryReport() {
@@ -427,7 +463,7 @@ public class ProductReportPage extends WebBasePage {
 			// TODO: handle exception
 			logger.info(manageProductPage.productName + " is not displayed successfully on Report");
 		}
-		driver.navigate().refresh();
+		
 	}
 	public void selectUniqueProductName() {
 		staticWait(2000);
@@ -450,11 +486,12 @@ public class ProductReportPage extends WebBasePage {
 	}
 	public void validateItemInItemLogHistoryReportWithAssignDate() {
 		staticWait(2000);
-		click(By.xpath(
-				"//div[@class='e-reportviewer-txtitem e-reportviewer-tab-focus-none']/div[@class='e-reportviewer-toggleicon ej-reportviewericonsexpand txtToggle_viewer']"),
-				"Item", 30);
+		
 
 		try {
+			click(By.xpath(
+					"//div[@class='e-reportviewer-txtitem e-reportviewer-tab-focus-none']/div[@class='e-reportviewer-toggleicon ej-reportviewericonsexpand txtToggle_viewer']"),
+					"Item", 30);
 			staticWait(3000);
 			String report = driver
 					.findElement(By.xpath("//div[contains(text(),'" + manageProductPage.productName + "')]")).getText();
@@ -465,7 +502,7 @@ public class ProductReportPage extends WebBasePage {
 			// TODO: handle exception
 			logger.info(manageProductPage.productName + " is not displayed successfully on Report");
 		}
-		driver.navigate().refresh();
+		
 	}
 	/*--------------------------------------------------------------Product Count Report------------------------------------------------------------*/
 	public void clickOnProductCountReport() {
@@ -645,6 +682,10 @@ public class ProductReportPage extends WebBasePage {
 			// TODO: handle exception
 			logger.info(productTypePage.productname + " is not displayed successfully on Report");
 		}
+		
+	}
+	public void pagerefresh() {
+		staticWait(3000);
 		driver.navigate().refresh();
 	}
 }

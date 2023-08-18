@@ -77,7 +77,32 @@ public class ProductTypeAction {
 		productTypePage.EnterTagNameTitle();
 		productTypePage.clicksaveButtonOfTagNameTitle();
 		productTypePage.clickOnIsTransferableToggleButton();
+		productTypePage.clickOnEmployAcceptanceToggleButton();
 		productTypePage.clickOnSelfCheckoutToggleButton();
+		productTypePage.clickOnEnableTermsAndConditionToggleButton();
+		productTypePage.clickOnProductCostToggleButton();
+		productTypePage.clickOnDepreciableToggleButton();
+		productTypePage.clickOnSaveButton();
+	}
+	public void AddProductTypeWithContainer()
+	{
+		
+		productTypePage.clickOnAddProductType();
+		productTypePage.EnterProductTypeName();
+		productTypePage.clickOnContainerToggleButton();
+		productTypePage.enterCompartmentName();
+		productTypePage.uploadimage();
+		productTypePage.clickOnResetButton();
+		productTypePage.uploadimage();
+		productTypePage.EnterDescription();
+		productTypePage.clickOnAssetToggleButton();
+		productTypePage.clickOnConsumableToggleButton();
+		productTypePage.clickOnAddNewTag();
+		productTypePage.EnterTagNameTitle();
+		productTypePage.clicksaveButtonOfTagNameTitle();
+		productTypePage.clickOnIsTransferableToggleButton();
+		productTypePage.clickOnSelfCheckoutToggleButton();
+		productTypePage.clickOnEmployAcceptanceToggleButton();
 		productTypePage.clickOnEnableTermsAndConditionToggleButton();
 		productTypePage.clickOnProductCostToggleButton();
 		productTypePage.clickOnDepreciableToggleButton();

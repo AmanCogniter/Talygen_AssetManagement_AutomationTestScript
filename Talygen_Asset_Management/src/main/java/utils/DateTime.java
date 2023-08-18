@@ -23,6 +23,7 @@ public class DateTime {
 	public static String lastMonthEndDate;
 	public static String tenDaysEndDate;
 	public static String oneDayDate;
+	public static String tomorrowDate;
 	public static LocalDate date3;
 	static String pattern = "MM/dd/yyyy";
 	static Date date = new Date();
@@ -165,6 +166,20 @@ public class DateTime {
 			e.printStackTrace();
 		}
 	}
+	// --------------------------Tomorrow Date -----------------------//
+		public void gettomorrowDate() {
+			try {
+				Calendar currentCalendar = Calendar.getInstance();
+				currentCalendar.add(Calendar.DATE, +2);
+				Date tomorrow = currentCalendar.getTime();
+				tomorrowDate = formatter.format(tomorrow);
+
+				System.out.println("yesterday Date: " + tomorrowDate);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 
 	// --------------------------10 days + Date ---------------//
 	public void getTenDaysDate() {

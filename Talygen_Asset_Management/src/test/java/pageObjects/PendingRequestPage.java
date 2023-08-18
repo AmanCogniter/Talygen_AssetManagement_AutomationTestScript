@@ -56,7 +56,7 @@ public class PendingRequestPage extends WebBasePage {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView();", Element);
 		click(By.xpath("//div/ul/li/a[@data-original-title='Pending Requests']"), "Pending request", 30);
-		staticWait(2000);
+		staticWait(3000);
 		WebElement pemdingRequestPage = driver.findElement(By.xpath("//div/span[text()='Pending Check Out Request']"));
 		if (pemdingRequestPage.isDisplayed()) {
 			logger.info("Pending Check Out Request list page opened successfully");
@@ -68,7 +68,8 @@ public class PendingRequestPage extends WebBasePage {
 	}
 
 	public void clickOnSelectProductName() {
-		staticWait(2000);
+		staticWait(3000);
+		click(By.xpath("//div/select[@id='catalogId']"), "Product Name DropDown", 30);
 		selectValueWithText(By.xpath("//div/select[@id='catalogId']"), manageProductPage.productName, "Product Name", 30);
 
 	}
@@ -174,6 +175,75 @@ public class PendingRequestPage extends WebBasePage {
 		enter(By.xpath("//div/input[@id='Search']"), manageProductPage.productName, "Product Name", 30);
 
 	}
-	
+	/*----------------------------------------------Code for Replace Request---------------------------------------------------------------------------*/
+	public void clickOnReplaceRequest() {
+		staticWait(1000);
+		click(By.xpath("//div/ul/li/a[contains(text(),'Replace Request')]"), "Replace Request", 30);
+		
+		try {
+			WebElement replacepage = driver.findElement(By.xpath("//div/span[text()='Replace Request']"));
+			if (replacepage.isDisplayed()) {
+				logger.info("Replace request page opened successfully");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.info("Replace request page not opened successfully");
+		}
+		
+	}
+	public void clickOnApproveOrRejectReplaceRequest() {
+		staticWait(1000);
+		click(By.xpath("//td[@class='text-center single-action']/a[@data-original-title='Approve/Reject Request']"), "Approve/Reject Request", 30);
+		
+		try {
+			WebElement approveOrRejectRequest = driver.findElement(By.xpath("//div/h5[contains(text(),'Replace Request')]"));
+			if (approveOrRejectRequest.isDisplayed()) {
+				logger.info("Replace request Approve or Reject page opened successfully");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.info("Replace request Approve or Reject  page not opened successfully");
+		}
+		
+	}
+	public void enterRemark() {
+		staticWait(2000);
+		enter(By.xpath("//textarea[@id='txtComment']"), prop.getProperty("remarks"), "Remark", 30);
+
+	}
+	public void clickOnsaveButton() {
+		staticWait(2000);
+		click(By.xpath("//div/a[text()='Save']"), "Save Button", 30);
+
+	}
+	public void validateNotifyMessageForApproveReplaceRequset() {
+		staticWait(1000);
+		try {
+			WebElement notifyMessage = driver.findElement(By.xpath("//div/span[contains(text(),'Product Replace Request has been Approved')]"));
+			if (notifyMessage.isDisplayed()) {
+				logger.info(notifyMessage.getText());
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			 e.printStackTrace();
+		}
+	}
+	public void clickOnselectStatus() {
+		staticWait(2000);
+		selectValueWithText(By.xpath("//tg-select/select[@id='ReplaceRequestStatus']"), "Rejected", "Status", 30);
+
+	}
+	public void validateNotifyMessageForRejecteReplaceRequset() {
+		staticWait(1000);
+		try {
+			WebElement notifyMessage = driver.findElement(By.xpath("//div/span[contains(text(),'Product Replace Request has been Rejected')]"));
+			if (notifyMessage.isDisplayed()) {
+				logger.info(notifyMessage.getText());
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			 e.printStackTrace();
+		}
+	}
 }
 

@@ -37,10 +37,12 @@ public class ProductTypePage extends WebBasePage{
 	 Date date = new Date();
 	 SimpleDateFormat dateformat = new SimpleDateFormat(pattern);
 	 String datevalue = dateformat.format(date);
+	 static String compartmentName;
 	 static  String tagname;
 	 static  String productname;
 	 static  String firstrowdata;
 	 static  String secondrowdata;
+	 static  String producttypename;
 	 String filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\testfiles\\";
 	    private final static String FILE_NAME = System.getProperty("user.dir")+"\\src\\main\\resources\\testdata.properties";
 	    private static Properties prop = new PropertiesLoader(FILE_NAME).load();
@@ -228,7 +230,7 @@ public class ProductTypePage extends WebBasePage{
      public void updateExceldata() throws EncryptedDocumentException, IOException {
     	 try {
     		 staticWait(2000);
-			FileInputStream fileInputStream = new FileInputStream("C:\\Users\\aanand\\eclipse-workspace\\Talygen_Asset_Management\\src\\main\\resources\\testfiles\\ProductTypeSample.xls");
+			FileInputStream fileInputStream = new FileInputStream("C:\\Users\\aanand\\eclipse-workspace\\Talygen_Asset_Management_AutomationTestScript\\Talygen_Asset_Management\\src\\main\\resources\\testfiles\\ProductTypeSample.xls");
 			Workbook workbook = WorkbookFactory.create(fileInputStream);
 			Sheet sheet = workbook.getSheet("producttypename");
 			Row row = sheet.getRow(1);
@@ -237,7 +239,7 @@ public class ProductTypePage extends WebBasePage{
 			Cell cell1 = row1.getCell(0);
 			cell.setCellValue("Laptop"+datevalue);
 			cell1.setCellValue("Hand Gloves"+datevalue);
-			FileOutputStream fileOutputStream = new FileOutputStream("C:\\Users\\aanand\\eclipse-workspace\\Talygen_Asset_Management\\src\\main\\resources\\testfiles\\ProductTypeSample.xls");
+			FileOutputStream fileOutputStream = new FileOutputStream("C:\\Users\\aanand\\eclipse-workspace\\Talygen_Asset_Management_AutomationTestScript\\Talygen_Asset_Management\\src\\main\\resources\\testfiles\\ProductTypeSample.xls");
 			workbook.write(fileOutputStream);
 			workbook.close();
 		} catch (FileNotFoundException e) {
@@ -248,7 +250,7 @@ public class ProductTypePage extends WebBasePage{
      public void readupdateExceldata() throws EncryptedDocumentException, IOException {
     	 try {
     		 staticWait(2000);
-			FileInputStream fileInputStream = new FileInputStream("C:\\Users\\aanand\\eclipse-workspace\\Talygen_Asset_Management\\src\\main\\resources\\testfiles\\ProductTypeSample.xls");
+			FileInputStream fileInputStream = new FileInputStream("C:\\Users\\aanand\\eclipse-workspace\\Talygen_Asset_Management_AutomationTestScript\\Talygen_Asset_Management\\src\\main\\resources\\testfiles\\ProductTypeSample.xls");
 			Workbook workbook = WorkbookFactory.create(fileInputStream);
 			Sheet sheet = workbook.getSheet("producttypename");
 			//get the last used row count
@@ -285,7 +287,7 @@ public class ProductTypePage extends WebBasePage{
 
  		// put path to your image in a clipboard
  		StringSelection ss = new StringSelection(
- 				"C:\\Users\\aanand\\eclipse-workspace\\Talygen_Asset_Management\\src\\main\\resources\\testfiles\\ProductTypeSample.xls");
+ 				"C:\\Users\\aanand\\eclipse-workspace\\Talygen_Asset_Management_AutomationTestScript\\Talygen_Asset_Management\\src\\main\\resources\\testfiles\\ProductTypeSample.xls");
  		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
 
  		// imitate mouse events like ENTER, CTRL+C, CTRL+V
@@ -336,7 +338,7 @@ public class ProductTypePage extends WebBasePage{
 			staticWait(2000);
 			clickOnSearchButton();
 			staticWait(3000);
-			String producttypename = driver.findElement(By.xpath("//td/a[contains(text(),'"+firstrowdata+"')]")).getText();
+			producttypename = driver.findElement(By.xpath("//td/a[contains(text(),'"+firstrowdata+"')]")).getText();
 			if (producttypename.contains(firstrowdata)) {
 				logger.info(producttypename+" "+popUpMessage);
 				
@@ -434,6 +436,17 @@ public class ProductTypePage extends WebBasePage{
 		  System.out.println(latestproductname);
 		  productname =latestproductname;
 	  }
+     public void clickOnContainerToggleButton()
+     {
+    	 staticWait(2000);
+    	 click(By.xpath("//input[@id='IsContainerN']/ancestor::asp-checkbox-toggle/descendant::span"),"Container Toggle Button", 30);
+     }
+     public void enterCompartmentName()
+     {
+    	 staticWait(2000);
+    	 compartmentName = prop.getProperty("compartments")+datevalue;
+    	 enter(By.xpath("//td/input[@id='CompartmentList_{0}__container_name']"),compartmentName,"Compartments Name", 20);
+     }
      public void uploadimage() {
 //  		findElementVisibility(
 //  				By.xpath("//span[@class='group-span-filestyle input-group-btn input-group-text bg-white']"), 20);
@@ -454,7 +467,7 @@ public class ProductTypePage extends WebBasePage{
 
   		// put path to your image in a clipboard
   		StringSelection ss = new StringSelection(
-  				"C:\\Users\\aanand\\eclipse-workspace\\Talygen_Asset_Management\\src\\main\\resources\\testfiles\\55565.jpg");
+  				"C:\\Users\\aanand\\eclipse-workspace\\Talygen_Asset_Management_AutomationTestScript\\Talygen_Asset_Management\\src\\main\\resources\\testfiles\\55565.jpg");
   		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
 
   		// imitate mouse events like ENTER, CTRL+C, CTRL+V
@@ -537,6 +550,11 @@ public class ProductTypePage extends WebBasePage{
      {
     	 staticWait(2000);
     	 click(By.xpath("//input[@id='IsSelfCheckOutN']/ancestor::asp-checkbox-toggle/descendant::span"),"SelfCheckout Toggle Button", 30);
+     }
+     public void clickOnEmployAcceptanceToggleButton()
+     {
+    	 staticWait(2000);
+    	 click(By.xpath("//input[@id='IsEmployeeAcceptanceN']/ancestor::asp-checkbox-toggle/descendant::span"),"Employ Acceptance Toggle Button", 30);
      }
      public void clickOnEnableTermsAndConditionToggleButton()
      {

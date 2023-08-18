@@ -26,14 +26,23 @@ public class NewProductTypeRequestAction {
 	{
 		newProductTypeRequestPage.clickOnNewRequestProductType();
 		newProductTypeRequestPage.clickOnSave();
+		newProductTypeRequestPage.verifyNotifyMessage();
 		newProductTypeRequestPage.VerifyMandatoryFieldValidationOfAddProductPage();
 		newProductTypeRequestPage.clickOnCancel();
 	}
 	public void checkFunctionalityOfRequestNewProductType() {
 
 		newProductTypeRequestPage.clickOnNewRequestProductType();
+		newProductTypeRequestPage.selectLocation();
+		newProductTypeRequestPage.EnterProductName();
 		newProductTypeRequestPage.EnterProductTypeName();
+		newProductTypeRequestPage.EnterRequestQuantity();
 		newProductTypeRequestPage.EnterDescription();
+		newProductTypeRequestPage.selectVendor();
+		newProductTypeRequestPage.EnterVendorRequestQuantity();
+		newProductTypeRequestPage.selectCurrency();
+		newProductTypeRequestPage.EnterUnitPrice();
+		newProductTypeRequestPage.UploadAttachment();
 		newProductTypeRequestPage.clickOnSave();
 		newProductTypeRequestPage.validateNotifyMessage();
 		

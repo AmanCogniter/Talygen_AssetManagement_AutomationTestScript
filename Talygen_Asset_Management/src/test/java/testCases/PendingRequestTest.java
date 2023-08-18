@@ -2,6 +2,8 @@ package testCases;
 
 import static reporting.ComplexReportFactory.getTest;
 
+import java.awt.AWTException;
+
 import org.testng.annotations.Test;
 
 import actions.LoginAction;
@@ -15,7 +17,7 @@ public class PendingRequestTest extends WebTestBase {
 	static String Screenname = " <b>Pending request</b>";
 
 	@Test(priority = 1, enabled = true)
-	public void verifyPendingRequest() {
+	public void verifyPendingRequest() throws AWTException {
 		test = getTest(Screenname + " :Verify Pending Request");
 		PendingRequestAction pendingRequestAction = new PendingRequestAction(driver);
 
@@ -79,7 +81,7 @@ public class PendingRequestTest extends WebTestBase {
 		
 		  new LoginAction(driver).logoutLogin();
 		  productTypeAction.GoToProductTypePage(); productTypeAction.AddProductType();
-		  
+		 
 		  new LoginAction(driver).logoutLogin();
 		  
 		  manageProductAction.GoTomanageProductPage();
@@ -113,10 +115,10 @@ public class PendingRequestTest extends WebTestBase {
 
 		ProductTypeAction productTypeAction = new ProductTypeAction(driver);
 
-		
-		  new LoginAction(driver).logoutLogin();
-		  productTypeAction.GoToProductTypePage(); productTypeAction.AddProductType();
-		  
+		/*
+		 * new LoginAction(driver).logoutLogin();
+		 * productTypeAction.GoToProductTypePage(); productTypeAction.AddProductType();
+		 */
 		  new LoginAction(driver).logoutLogin();
 		  
 		  manageProductAction.GoTomanageProductPage();

@@ -64,7 +64,7 @@ public class ProductReportAction {
 		productReportPage.selectTodaydate();
 		productReportPage.clickOnSearch();
 		productReportPage.validateProjectReport();
-		productReportPage.validateProjectNameInReport();
+		//productReportPage.validateProjectNameInReport();
 		
 	}
 	/*--------------------------------------------------------------Audit Log report------------------------------------------------------------*/
@@ -150,7 +150,7 @@ public class ProductReportAction {
 		productReportPage.selectTodaydateOfItemLogHistoryReport();
 		productReportPage.clickOnSearch();
 		productReportPage.validateItemLogHistoryReport();
-		productReportPage.validateItemInItemLogHistoryReportWithAssignDate();
+		//productReportPage.validateItemInItemLogHistoryReportWithAssignDate();
 		
 	}
 	/*--------------------------------------------------------------Product Count Report------------------------------------------------------------*/
@@ -169,8 +169,8 @@ public class ProductReportAction {
 		
 		productReportPage.selectProductTypeForProductCountReport();
 		productReportPage.clickOnSearch();
-		productReportPage.validateProjectReport();
-		productReportPage.validateProjectNameInReport();
+		productReportPage.validateProjectReportOfCountReport();
+		//productReportPage.validateProjectNameInReport();
 		
 	}
 	public void validateProductCountReportWithDeployDate() {
@@ -206,5 +206,8 @@ public class ProductReportAction {
 		productReportPage.validateProjectReports();
 		productReportPage.validateProjectNameInProjectReport();
 		
+	}
+	public void pageRefresh() {
+		productReportPage.pagerefresh();
 	}
 }

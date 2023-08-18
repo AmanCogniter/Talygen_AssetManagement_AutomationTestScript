@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import actions.LoginAction;
 import actions.NewProductTypeRequestAction;
+import actions.ProductTypeAction;
 import utils.WebTestBase;
 
 public class NewProductTypeRequestTest extends WebTestBase {
@@ -24,6 +25,11 @@ public class NewProductTypeRequestTest extends WebTestBase {
 	public void addNewProductType() {
 		test = getTest(Screenname + " : Add New Product Type screen");
 		NewProductTypeRequestAction newProductTypeRequestAction = new NewProductTypeRequestAction(driver);
+		
+		ProductTypeAction productTypeAction = new ProductTypeAction(driver);
+		new LoginAction(driver).logoutLogin();
+		productTypeAction.GoToProductTypePage();
+		productTypeAction.AddProductType();
 		new LoginAction(driver).logoutLogin();
 		newProductTypeRequestAction.GoToNewProductTypeRequesPage();
 		newProductTypeRequestAction.checkFunctionalityOfRequestNewProductType();

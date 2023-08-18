@@ -66,4 +66,25 @@ public class PendingRequestAction {
 		pendingRequestPage.validateNotifyMessageForReject();
 		
 	}
+	public void VerifyFunctionalityReplaceRequestPagewithApproveFunctionality()
+	{
+		pendingRequestPage.clickOnReplaceRequest();
+		pendingRequestPage.clickOnApproveOrRejectReplaceRequest();
+		pendingRequestPage.enterRemark();
+		pendingRequestPage.clickOnsaveButton();
+		pendingRequestPage.validateNotifyMessageForApproveReplaceRequset();
+		
+		
+	}
+	public void VerifyFunctionalityReplaceRequestPagewithRejectFunctionality()
+	{
+		pendingRequestPage.clickOnReplaceRequest();
+		pendingRequestPage.clickOnApproveOrRejectReplaceRequest();
+		pendingRequestPage.clickOnselectStatus();
+		pendingRequestPage.enterRemark();
+		pendingRequestPage.clickOnsaveButton();
+		pendingRequestPage.validateNotifyMessageForRejecteReplaceRequset();
+		
+		
+	}
 }

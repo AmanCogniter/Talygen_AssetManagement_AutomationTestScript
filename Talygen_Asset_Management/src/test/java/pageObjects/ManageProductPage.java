@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +33,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import com.relevantcodes.extentreports.LogStatus;
 
+import utils.DateTime;
 import utils.PropertiesLoader;
 import utils.WebBasePage;
 
@@ -41,6 +43,7 @@ public class ManageProductPage extends WebBasePage {
 	Date date = new Date();
 	SimpleDateFormat dateformat = new SimpleDateFormat(pattern);
 	String datevalue = dateformat.format(date);
+	
 	/* code for tomorrow date */
 	
 	// static String productname;
@@ -48,7 +51,10 @@ public class ManageProductPage extends WebBasePage {
 	static String pairedProductName;
 	static String productName;
 	static String secondrowdata;
-	ProductTypePage productTypePage;
+	
+	  ProductTypePage productTypePage;
+	
+	 
 	String filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\testfiles\\";
 	private final static String FILE_NAME = System.getProperty("user.dir")
 			+ "\\src\\main\\resources\\testdata.properties";
@@ -217,7 +223,7 @@ public class ManageProductPage extends WebBasePage {
 
 		// put path to your image in a clipboard
 		StringSelection ss = new StringSelection(
-				"C:\\Users\\aanand\\eclipse-workspace\\Talygen_Asset_Management\\src\\main\\resources\\testfiles\\55565.jpg");
+				"C:\\Users\\aanand\\eclipse-workspace\\Talygen_Asset_Management_AutomationTestScript\\Talygen_Asset_Management\\src\\main\\resources\\testfiles\\55565.jpg");
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
 
 		// imitate mouse events like ENTER, CTRL+C, CTRL+V
@@ -355,22 +361,24 @@ public class ManageProductPage extends WebBasePage {
 	}
 
 	public void clickOnSelectFromLocation() {
-		staticWait(1000);
+		staticWait(2000);
 		click(By.xpath("//div/span[text()='Select']"), "From Location TextField ", 30);
 		staticWait(1000);
 		click(By.xpath("//a/span[text()='Dallas']"), "Dallas", 30);
-
+		staticWait(50000);
 	}
 
 	public void clickOnSelectProductType() {
-		staticWait(12000);
+		staticWait(48000);
 		selectValueWithText(By.xpath("//div/select[@name='AssetTypeFilter']"), productTypePage.productname,
 				"Product Type Name", 30);
 
 	}
 
 	public void clickOnSelectProductName() {
-		staticWait(1000);
+		staticWait(2000);
+		click(By.xpath("//div/select[@id='AssetCatalogFilter']"), "Product Name Dropdown", 30);
+		staticWait(50000);
 		selectValueWithText(By.xpath("//div/select[@id='AssetCatalogFilter']"), productName, "Product Name", 30);
 
 	}
@@ -683,7 +691,7 @@ public class ManageProductPage extends WebBasePage {
 
 		// put path to your image in a clipboard
 		StringSelection ss = new StringSelection(
-				"C:\\Users\\aanand\\eclipse-workspace\\Talygen_Asset_Management\\src\\main\\resources\\testfiles\\55565.jpg");
+				"C:\\Users\\aanand\\eclipse-workspace\\Talygen_Asset_Management_AutomationTestScript\\Talygen_Asset_Management\\src\\main\\resources\\testfiles\\55565.jpg");
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
 
 		// imitate mouse events like ENTER, CTRL+C, CTRL+V
@@ -765,6 +773,10 @@ public class ManageProductPage extends WebBasePage {
 		staticWait(1000);
 		click(By.xpath("//div/span/a[@data-original-title='Add Relationship']"), "Add relation", 30);
 	}
+	public void clickOnSearchByProduct() {
+		staticWait(1000);
+		click(By.xpath("//div/label[@for='SearchProducts']"), "Search By Product", 30);
+	}
 
 	public void clickOnSearchButtonOfAddRelation() {
 		staticWait(1000);
@@ -803,7 +815,7 @@ public class ManageProductPage extends WebBasePage {
 
 	public void clickOnDeleteAddedMoreProductButton() {
 		staticWait(1000);
-		clickByJavascript(By.xpath("(//td/a[@class='btnDelete float-right'])[last()]"), "Delete", 30);
+		clickByJavascript(By.xpath("(//td/a[@class='btnDelete'])[last()]"), "Delete", 30);
 		try {
 			WebElement addMoreProduct = driver.findElement(By.xpath("//tr/td[text()='2']"));
 			if (addMoreProduct.isDisplayed()) {
@@ -911,9 +923,22 @@ public class ManageProductPage extends WebBasePage {
 				"Search by product radio Button", 30);
 	}
 
-	public void selecttomorrowDat4() {
+	public void selecttomorrowDate() throws AWTException {
 		staticWait(1000);
-		clickByJavascript(By.xpath("//div/a[@id='btnCheckAvailability']"), "Check Avability", 30);
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, 1);
+        Date date = cal.getTime();
+        String tomorrowDate = dateFormat.format(date);
+		click(By.xpath("//div/tg-input/input[@id='AssignedTill']"), "Assigned Till", 30);
+		 Robot robot = new Robot();
+		 robot.keyPress(KeyEvent.VK_CONTROL);
+		 robot.keyPress(KeyEvent.VK_A);
+		 robot.keyRelease(KeyEvent.VK_A);
+		 robot.keyRelease(KeyEvent.VK_CONTROL);
+		 robot.keyPress(KeyEvent.VK_BACK_SPACE);
+		 robot.keyRelease(KeyEvent.VK_BACK_SPACE);
+		 enter(By.xpath("//div/tg-input/input[@id='AssignedTill']"), tomorrowDate, "Tomorrow Date", 30);
 	}
 
 	public void clickOnCheckAvability() {
@@ -958,11 +983,17 @@ public class ManageProductPage extends WebBasePage {
 		click(By.xpath("//table[@id='tblUniqueItems']/thead/tr/th/div[@class='custom-control custom-checkbox']"),
 				"Product avability checkbox", 30);
 	}
+	public void clickOnTermsAndConditionCheckBox() {
+		staticWait(1000);
+		click(By.xpath("//label[contains(text(),'I agree to the Terms and Conditions')]"),
+				"Terms and Conditions checkbox", 30);
+	}
 
 	public void clickOnProceedToCheckOut() {
 		staticWait(1000);
 		click(By.xpath("//div/a[@id='btnCheckout']"), "Proceed to checkout", 30);
 		try {
+			staticWait(75000);
 			WebElement newcheckoutpage = driver.findElement(By.xpath("//div/span[text()='New Checkout']"));
 			if (newcheckoutpage.isDisplayed()) {
 				logger.info("New checkout page opened successfully");
@@ -975,7 +1006,7 @@ public class ManageProductPage extends WebBasePage {
 	}
 
 	public void clickOnSaveButtonOfNewCheckOutPage() {
-		staticWait(1000);
+		staticWait(5000);
 		click(By.xpath("//div/a[@id='ancsaverequest']"), "Save Button", 30);
 		try {
 			WebElement checkoutListpage = driver.findElement(By.xpath("//div/span[contains(text(),'Check-Out List')]"));
@@ -1041,7 +1072,7 @@ public class ManageProductPage extends WebBasePage {
 		try {
 			staticWait(2000);
 			FileInputStream fileInputStream = new FileInputStream(
-					"C:\\Users\\aanand\\eclipse-workspace\\Talygen_Asset_Management\\src\\main\\resources\\testfiles\\ProductSample.xls");
+					"C:\\Users\\aanand\\eclipse-workspace\\Talygen_Asset_Management_AutomationTestScript\\Talygen_Asset_Management\\src\\main\\resources\\testfiles\\ProductSample.xls");
 			Workbook workbook = WorkbookFactory.create(fileInputStream);
 			Sheet sheet = workbook.getSheet("productname");
 			Row row = sheet.getRow(1);
@@ -1051,7 +1082,7 @@ public class ManageProductPage extends WebBasePage {
 			cell.setCellValue("Spark" + datevalue);
 			cell1.setCellValue("Nexus" + datevalue);
 			FileOutputStream fileOutputStream = new FileOutputStream(
-					"C:\\Users\\aanand\\eclipse-workspace\\Talygen_Asset_Management\\src\\main\\resources\\testfiles\\ProductSample.xls");
+					"C:\\Users\\aanand\\eclipse-workspace\\Talygen_Asset_Management_AutomationTestScript\\Talygen_Asset_Management\\src\\main\\resources\\testfiles\\ProductSample.xls");
 			workbook.write(fileOutputStream);
 			workbook.close();
 		} catch (FileNotFoundException e) {
@@ -1064,7 +1095,7 @@ public class ManageProductPage extends WebBasePage {
 		try {
 			staticWait(3000);
 			FileInputStream fileInputStream = new FileInputStream(
-					"C:\\Users\\aanand\\eclipse-workspace\\Talygen_Asset_Management\\src\\main\\resources\\testfiles\\ProductSample.xls");
+					"C:\\Users\\aanand\\eclipse-workspace\\Talygen_Asset_Management_AutomationTestScript\\Talygen_Asset_Management\\src\\main\\resources\\testfiles\\ProductSample.xls");
 			Workbook workbook = WorkbookFactory.create(fileInputStream);
 			Sheet sheet = workbook.getSheet("productname");
 			// get the last used row count
@@ -1103,7 +1134,7 @@ public class ManageProductPage extends WebBasePage {
 
 		// put path to your image in a clipboard
 		StringSelection ss = new StringSelection(
-				"C:\\Users\\aanand\\eclipse-workspace\\Talygen_Asset_Management\\src\\main\\resources\\testfiles\\ProductSample.xls");
+				"C:\\Users\\aanand\\eclipse-workspace\\Talygen_Asset_Management_AutomationTestScript\\Talygen_Asset_Management\\src\\main\\resources\\testfiles\\ProductSample.xls");
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
 
 		// imitate mouse events like ENTER, CTRL+C, CTRL+V

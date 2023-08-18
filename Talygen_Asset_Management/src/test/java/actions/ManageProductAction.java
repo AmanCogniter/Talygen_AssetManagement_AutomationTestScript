@@ -1,21 +1,24 @@
 package actions;
 
+import java.awt.AWTException;
 import java.io.IOException;
 
 import org.apache.poi.EncryptedDocumentException;
 import org.openqa.selenium.WebDriver;
 
 import pageObjects.ManageProductPage;
+import pageObjects.MyProductsPage;
 import pageObjects.ProductTypePage;
 
 public class ManageProductAction {
 	WebDriver driver;
 	ManageProductPage manageProductPage;
-	
+	MyProductsPage myProductsPage;
 	public  ManageProductAction(WebDriver driver)
 	{
 		this.driver= driver;
 		manageProductPage = new ManageProductPage(driver);
+		myProductsPage = new MyProductsPage(driver);
 	}
 	
 	public void GoTomanageProductPage()
@@ -50,7 +53,7 @@ public class ManageProductAction {
 	public void SearchandDeleteaddedProduct()
 	{
 		
-		manageProductPage.clickOnExpandSearchField();
+		//manageProductPage.clickOnExpandSearchField();
 		//manageProductPage.clickOnAddProductTypeActionButton();
 		manageProductPage.enterproductnameInSearchField();
 		manageProductPage.clickOnSearchbutton();
@@ -146,7 +149,7 @@ public class ManageProductAction {
 	public void updateProduct()
 	{
 		
-		manageProductPage.clickOnExpandSearchField();
+		//manageProductPage.clickOnExpandSearchField();
 		manageProductPage.enterproductnameInSearchField();
 		manageProductPage.clickOnSearchbutton();
 		//manageProductPage.clickOnProduct();// 1st way to go to update product
@@ -179,6 +182,7 @@ public class ManageProductAction {
 	{
 		
 		manageProductPage.clickOnAddRelation();
+		manageProductPage.clickOnSearchByProduct();
 		manageProductPage.clickOnSelectProductName();
 		manageProductPage.clickOnSearchButtonOfAddRelation();
 		manageProductPage.clickOnSelectPairedProduct();
@@ -188,7 +192,7 @@ public class ManageProductAction {
 		manageProductPage.clickOnSaveAddRelationship();
 		manageProductPage.captureNotifyMessageOfAddRelationship();
 		/* verify on Product list page */
-		manageProductPage.clickOnExpandSearchField();
+		//manageProductPage.clickOnExpandSearchField();
 		manageProductPage.enterproductnameInSearchField();
 		manageProductPage.clickOnSearchbutton();
 		manageProductPage.verifyAddRelationShipProductInProductListpage();
@@ -197,16 +201,29 @@ public class ManageProductAction {
 		manageProductPage.clickOnCloseButton();
 	}
 	
-	public void VerifyfunctionalityOfCheckAvability()
+	public void VerifyfunctionalityOfCheckAvability() throws AWTException
 	{
 		
 		manageProductPage.clickOnCheckAvabilityButton();
 		manageProductPage.clickOnSearchByProductRadioButton();
 		manageProductPage.clickOnSelectProductName();
+		manageProductPage.selecttomorrowDate();
 		manageProductPage.clickOnCheckAvability();
 		manageProductPage.CheckProductAvabilityAndQuantity();
 		manageProductPage.clickOnProductAvaibilityCheckBox();
 		manageProductPage.clickOnProceedToCheckOut();
+		
+		
+		/* ----------------------------------------------------*/	
+		myProductsPage.clickOnAddProduct();
+		  myProductsPage.clickOnSelectProductType();
+		  myProductsPage.clickOnSelectProductName();
+		 // myProductsPage.clickOnSelectItem(); 
+		  //myProductsPage.clickOnSearch();
+		  myProductsPage.clickOnClose();
+		  myProductsPage.clickOnTermsAndCondition();
+		  /*      ----------------------------------------------------			 */
+		//manageProductPage.clickOnTermsAndConditionCheckBox();
 		manageProductPage.clickOnSaveButtonOfNewCheckOutPage();
 		manageProductPage.clickOnExpandOrCollapseAllSearchField();
 	
@@ -214,16 +231,18 @@ public class ManageProductAction {
 		manageProductPage.clickOnSearchbuttonOfCheckOutList();
 		
 	}
-	public void VerifyfunctionalityOfCheckAvabilityWithRejection()
+	public void VerifyfunctionalityOfCheckAvabilityWithRejection() throws AWTException
 	{
 		
 		manageProductPage.clickOnCheckAvabilityButton();
 		manageProductPage.clickOnSearchByProductRadioButton();
 		manageProductPage.clickOnSelectProductName();
+		manageProductPage.selecttomorrowDate();
 		manageProductPage.clickOnCheckAvability();
 		manageProductPage.CheckProductAvabilityAndQuantity();
 		manageProductPage.clickOnProductAvaibilityCheckBox();
 		manageProductPage.clickOnProceedToCheckOut();
+		manageProductPage.clickOnTermsAndConditionCheckBox();
 		manageProductPage.clickOnSaveButtonOfNewCheckOutPage();
 		manageProductPage.clickOnExpandOrCollapseAllSearchField();
 	

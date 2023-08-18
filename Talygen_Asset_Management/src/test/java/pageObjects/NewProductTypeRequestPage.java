@@ -24,6 +24,7 @@ public class NewProductTypeRequestPage extends WebBasePage {
 	SimpleDateFormat dateformat = new SimpleDateFormat(pattern);
 	String datevalue = dateformat.format(date);
 	static String producttypename;
+	static String productname;
 	ProductTypePage productTypePage;
 	ManageProductPage manageProductPage;
 	String filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\testfiles\\";
@@ -92,6 +93,21 @@ public class NewProductTypeRequestPage extends WebBasePage {
 		click(By.xpath("//div/button[contains(text(),'Save')]"), "Save Button", 30);
 
 	}
+	public void verifyNotifyMessage() {
+		staticWait(2000);
+
+		WebElement notifyMessage = driver.findElement(By.xpath("//div/span[contains(text(),'Please correct the highlighted errors')]"));
+		try {
+			if (notifyMessage.isDisplayed()) {
+				logger.info("Notify Message dispayed succesfully");
+				click(By.xpath("//button[@id='closenotifymessage']"), "Close NotifyMessage popup", 30);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			logger.info("Notify Message not dispayed succesfully");
+		}
+	}
 
 	public void VerifyMandatoryFieldValidationOfAddProductPage() {
 		int i = 0;
@@ -100,10 +116,10 @@ public class NewProductTypeRequestPage extends WebBasePage {
 
 		List<WebElement> errorMessageLocator = findMultipleElement(
 				By.xpath("//div[@class='form-group']//span[contains(@class,'invalid-feedback')]"), 15);
-		String[] expectedValue = { "Title", "Description" };
+		String[] expectedValue = { "Location","Product Name","Requested Quantity","Description","Vendor" };
 		for (Object expected : expectedValue) {
-			WebElement AsteriskField = findElementVisibility(By.xpath("//label[text()='" + expected
-					+ "']//ancestor::div[@class='form-group']/descendant::span[@class='mandatory']"), 20);
+			WebElement AsteriskField = findElementVisibility(By.xpath("//label[contains(text(),'" + expected
+					+ "')]/ancestor::div[@class='form-group']/descendant::span[text()='*']"), 20);
 			if (AsteriskField != null) {
 				getTest().log(LogStatus.PASS, "The Asterisk symbol is displayed for " + expected + " field");
 				logger.info("The Asterisk symbol is displayed for " + expected + " field");
@@ -140,11 +156,34 @@ public class NewProductTypeRequestPage extends WebBasePage {
 		click(By.xpath("//div/a[@data-original-title='Cancel']"), "Cancel Button", 30);
 
 	}
+	public void selectLocation() {
+		staticWait(3000);
+		click(By.xpath("//div[@type='button']"), "Location Dropdown", 30);
+		click(By.xpath("//li/a/span[text()='Dallas']"), "Location", 20);
+
+	}
+	public void EnterProductName() {
+		staticWait(3000);
+		productname = prop.getProperty("productname") + datevalue;
+		
+		enter(By.xpath("//div/input[@name='productName']"), productname, " Product Name", 20);
+
+	}
+	public void EnterRequestQuantity() {
+		staticWait(3000);
+		String quantity = prop.getProperty("quantity") ;
+		
+		enter(By.xpath("//div/input[@id='Quantity']"), quantity, "Requested Quantity", 20);
+
+	}
 
 	public void EnterProductTypeName() {
 		staticWait(3000);
-		producttypename = prop.getProperty("producttypename") + datevalue;
-		enter(By.xpath("//tg-input/input[@id='RequisitionTitle']"), producttypename, " Product Type Name", 20);
+		producttypename = productTypePage.productname;
+		click(By.xpath("//div/select[@id='AssetTypeFilter']"), "Product Type Dropdown", 30);
+		logger.info(producttypename);
+		staticWait(2000);
+		selectValueWithText(By.xpath("//div/select[@id='AssetTypeFilter']"), producttypename, " Product Type Name", 20);
 
 	}
 
@@ -155,6 +194,38 @@ public class NewProductTypeRequestPage extends WebBasePage {
 				20);
 
 	}
+	public void selectVendor() {
+		staticWait(3000);
+		
+		selectValueWithText(By.xpath("//div/select[@id='QVendor']"), "Vendor", "Vendor", 20);
+
+	}
+	public void EnterVendorRequestQuantity() {
+		staticWait(3000);
+		String quantity = prop.getProperty("quantity") ;
+		
+		enter(By.xpath("//div/input[@id='QuoteQuantity']"), quantity, "Requested Quantity", 20);
+
+	}
+	public void selectCurrency() {
+		staticWait(3000);
+		
+		selectValueWithText(By.xpath("//div/select[@id='QCurrency']"), "United States dollar (USD)", "Currency", 20);
+
+	}
+	public void EnterUnitPrice() {
+		staticWait(3000);
+		String unitPrice = prop.getProperty("unitPrice") ;
+		
+		enter(By.xpath("//div/input[@id='QuoteAmount']"), unitPrice, "Unit Price", 20);
+		click(By.xpath("//div/input[@id='QuoteQuantity']"), "Requested Quantity", 30);
+
+	}
+	 public void UploadAttachment()
+     {
+    	 
+    	 uploadDoc(By.cssSelector("input#flFile"),filePath+prop.getProperty("testfileDoc"), "Attachment", 30);
+     }
 
 	public void validateNotifyMessage() {
 		staticWait(2000);
@@ -168,6 +239,7 @@ public class NewProductTypeRequestPage extends WebBasePage {
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
 			logger.info("New Product Type Request not added successfully");
 		}
 	}
